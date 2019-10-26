@@ -32,36 +32,19 @@ bot.on("text", (ctx) => {
                 user.user_id = ctx.message.from.id;
                 user.platform = user.platform ? user.platform : "telegram"
                 delete user.id;
-                var data = {
-                    url: ctx.message.text,
-                    user: [
-                        user
-                    ]
-                };
-                console.log(data)
-                var options = {
-                  method: 'POST',
-                  url: 'https://squanchymusic-backend.herokuapp.com/squanchy/playlists/',
-                  headers: {
-                    'content-type': 'application/json',
-                    authorization: 'Token b45ae4cecf894c51e45a624c5cad2e8349404c2b'
-                  },
-                  body: data,
-                  json: true
-                };
-                console.log(data)
-                request(options, function (error, response, body) {
-                  if (error) throw new Error(error);
-                  console.log(body)
-                  if(response.statusCode === 201){
-                    ctx.reply("Thanks! We'll send you your match soon! You can drop more links if you want. Will take into account all :)")
-                  }
-                });
                 if(ctx.message.from.id !== ctx.message.chat.id){
                     var data = {
                         platform: "telegram",
                         group_id: ctx.message.chat.id,
                         name: ctx.message.chat.title,
+                        playlists: [
+                            {
+                                url: ctx.message.text,
+                                users: [
+                                    user
+                                ]
+                            }
+                        ],
                         users: [
                             user
                         ]
@@ -83,6 +66,32 @@ bot.on("text", (ctx) => {
                       if (error) throw new Error(error);
                       console.log(body)
                     });    
+                }else{
+                    var data = {
+                        url: ctx.message.text,
+                        user: [
+                            user
+                        ]
+                    };
+                    console.log(data)
+                    var options = {
+                      method: 'POST',
+                      url: 'https://squanchymusic-backend.herokuapp.com/squanchy/playlists/',
+                      headers: {
+                        'content-type': 'application/json',
+                        authorization: 'Token b45ae4cecf894c51e45a624c5cad2e8349404c2b'
+                      },
+                      body: data,
+                      json: true
+                    };
+                    console.log(data)
+                    request(options, function (error, response, body) {
+                      if (error) throw new Error(error);
+                      console.log(body)
+                      if(response.statusCode === 201){
+                        ctx.reply("Thanks! We'll send you your match soon! You can drop more links if you want. Will take into account all :)")
+                      }
+                    });
                 }
             }else{
                 ctx.reply("We don't work with that music provider now :(")
@@ -91,46 +100,46 @@ bot.on("text", (ctx) => {
     }
 })
 
-bot.on('message', (ctx) => {
-    if(ctx.message.new_chat_participant){
-        if(ctx.message.new_chat_participant.username === "mts_music_bot"){
-            // SEND REQUEST: create group  
-            // ctx.message.chat.title
-            var user = ctx.message.from;
-            user.user_id = ctx.message.from.id;
-            user.platform = user.platform ? user.platform : "telegram"
-            delete user.id;
-            var data = {
-                platform: "telegram",
-                group_id: ctx.message.chat.id,
-                name: ctx.message.chat.title,
-                users: [
-                    user
-                ]
-            };
-            console.log(data)
+// bot.on('message', (ctx) => {
+//     if(ctx.message.new_chat_participant){
+//         if(ctx.message.new_chat_participant.username === "mts_music_bot"){
+//             // SEND REQUEST: create group  
+//             // ctx.message.chat.title
+//             var user = ctx.message.from;
+//             user.user_id = ctx.message.from.id;
+//             user.platform = user.platform ? user.platform : "telegram"
+//             delete user.id;
+//             var data = {
+//                 platform: "telegram",
+//                 group_id: ctx.message.chat.id,
+//                 name: ctx.message.chat.title,
+//                 users: [
+//                     user
+//                 ]
+//             };
+//             console.log(data)
 
-            var options = {
-              method: 'POST',
-              url: 'https://squanchymusic-backend.herokuapp.com/squanchy/groups/',
-              headers: {
-                'content-type': 'application/json',
-                authorization: 'Token b45ae4cecf894c51e45a624c5cad2e8349404c2b'
-              },
-              body: data,
-              json: true
-            };
-            console.log(data)
-            request(options, function (error, response, body) {
-              if (error) throw new Error(error);
-              console.log(body)
-              if(response.statusCode === 200){
-                ctx.reply("Hi! I match people according to musical tastes! Send a link to the playlist you like. Can several, but in different messages. For example, Apple Music has a 'for you' playlist-share it!") 
-              }
-            });
-        }
-    }
-})
+//             var options = {
+//               method: 'POST',
+//               url: 'https://squanchymusic-backend.herokuapp.com/squanchy/groups/',
+//               headers: {
+//                 'content-type': 'application/json',
+//                 authorization: 'Token b45ae4cecf894c51e45a624c5cad2e8349404c2b'
+//               },
+//               body: data,
+//               json: true
+//             };
+//             console.log(data)
+//             request(options, function (error, response, body) {
+//               if (error) throw new Error(error);
+//               console.log(body)
+//               if(response.statusCode === 200){
+//                 ctx.reply("Hi! I match people according to musical tastes! Send a link to the playlist you like. Can several, but in different messages. For example, Apple Music has a 'for you' playlist-share it!") 
+//               }
+//             });
+//         }
+//     }
+// })
 
 let validURL = (str) => {
     var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol

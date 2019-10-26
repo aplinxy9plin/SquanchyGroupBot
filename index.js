@@ -40,7 +40,7 @@ bot.on("text", (ctx) => {
                         playlists: [
                             {
                                 url: ctx.message.text,
-                                users: [
+                                user: [
                                     user
                                 ]
                             }
@@ -64,7 +64,7 @@ bot.on("text", (ctx) => {
                     console.log(data)
                     request(options, function (error, response, body) {
                       if (error) throw new Error(error);
-                      console.log(body)
+                      console.log(JSON.parse(body))
                       ctx.reply("Thanks! We'll send you your match soon! You can drop more links if you want. Will take into account all :)")
                     });    
                 }else{

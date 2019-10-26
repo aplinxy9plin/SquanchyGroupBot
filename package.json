@@ -4,6 +4,9 @@
   "main": "index.js",
   "author": "AplinXy9plin <evilberry@icloud.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  },
   "dependencies": {
     "express": "^4.17.1",
     "request": "^2.88.0",

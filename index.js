@@ -65,6 +65,7 @@ bot.on("text", (ctx) => {
                     request(options, function (error, response, body) {
                       if (error) throw new Error(error);
                       console.log(body)
+                      ctx.reply("Thanks! We'll send you your match soon! You can drop more links if you want. Will take into account all :)")
                     });    
                 }else{
                     var data = {

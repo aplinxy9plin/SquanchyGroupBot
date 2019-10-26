@@ -13,7 +13,7 @@ bot.start((ctx) => {
     ctx.reply("Hi! I match people according to musical tastes! Send a link to the playlist you like. Can several, but in different messages. For example, Apple Music has a 'for you' playlist-share it!")
 })
 bot.command('playlist', (ctx) => 
-    ctx.reply(`Take your playlist, baby <3\nhttps://aplinxy9plin.github.io/SquanchyParty/?group_id=${ctx.message.chat.id}#do_sexy`)
+    ctx.reply(`Take your playlist, baby <3\n[Перейти в плейлист](https://aplinxy9plin.github.io/SquanchyParty/?group_id=${ctx.message.chat.id}#do_sexy)`)
 )
 bot.on("text", (ctx) => {
     var data = ctx.message.from;

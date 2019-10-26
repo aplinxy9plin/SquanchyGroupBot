@@ -62,9 +62,9 @@ bot.on("text", (ctx) => {
                       json: true
                     };
                     console.log(data)
+                    ctx.reply("Thanks! We'll send you your match soon! You can drop more links if you want. Will take into account all :)")
                     request(options, function (error, response, body) {
                       if (error) throw new Error(error);
-                      ctx.reply("Thanks! We'll send you your match soon! You can drop more links if you want. Will take into account all :)")
                     });    
                 }else{
                     var data = {

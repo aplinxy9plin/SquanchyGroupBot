@@ -15,6 +15,9 @@ bot.start((ctx) => {
 bot.command('playlist', (ctx) => 
     ctx.reply(`Take your playlist, baby <3\nhttps://aplinxy9plin.github.io/SquanchyParty/?group_id=${ctx.message.chat.id}#do_sexy`)
 )
+bot.command('match', (ctx) => 
+    ctx.reply(`Take your matches, baby <3\nhttps://aplinxy9plin.github.io/SquanchyParty/?user_id=${ctx.message.from.id}#do_sexy`)
+)
 bot.on("text", (ctx) => {
     var data = ctx.message.from;
     data.platform = "telegram"

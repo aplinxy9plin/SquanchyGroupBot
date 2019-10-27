@@ -12,9 +12,11 @@ bot.startWebhook(`/bot1000448910:AAF8SH2B7lz-vI53M-vD3dp3U6SzYp611Z4`, null, POR
 bot.start((ctx) => {
     ctx.reply("Hi! I match people according to musical tastes! Send a link to the playlist you like. Can several, but in different messages. For example, Apple Music has a 'for you' playlist-share it!")
 })
-bot.command('playlist', (ctx) => 
-    ctx.reply(`Take your playlist, baby <3\nhttps://aplinxy9plin.github.io/SquanchyParty/?group_id=${ctx.message.chat.id}#do_sexy`)
-)
+bot.command('playlist', (ctx) => {
+    if(ctx.message.from.id !== ctx.message.chat.id){
+        ctx.reply(`Take your playlist, baby <3\nhttps://aplinxy9plin.github.io/SquanchyParty/?group_id=${ctx.message.chat.id}#do_sexy`)
+    }
+})
 bot.command('match', (ctx) => 
     ctx.reply(`Take your matches, baby <3\nhttps://aplinxy9plin.github.io/SquanchyParty/?user_id=${ctx.message.from.id}#do_sexy`)
 )
@@ -23,7 +25,7 @@ bot.on("text", (ctx) => {
     data.platform = "telegram"
     if(ctx.message.text){
         if(ctx.message.text.toLowerCase() === "да"){
-            ctx.reply("пизда")
+            ctx.reply("da")
         }
         if(validURL(ctx.message.text)){
             if( ctx.message.text.indexOf("apple.com") > 0 ||
